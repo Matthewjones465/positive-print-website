@@ -142,21 +142,28 @@ export default async function Home() {
       </section>
 
       {/* ---- clients strip ---- */}
-      <section className="section cap-section" style={{ paddingBlock: "clamp(32px,5vw,56px)" }}>
-        <div className="wrap">
-          <span className="eyebrow-mark">Trusted by</span>
-          <div className="clients-row">
-            {clients.map((c) =>
-              c.logoUrl ? (
-                <img key={c._id} className="client-chip" src={c.logoUrl} alt={c.name} style={{ height: "28px", width: "auto" }} />
-              ) : (
-                <span className="client-chip" key={c._id} style={{ background: "transparent", borderColor: "color-mix(in srgb, var(--paper) 30%, transparent)", color: "var(--paper)" }}>
-                  {c.name}
-                </span>
-              )
-            )}
+      <section className="section cap-section clients-section" style={{ paddingBlock: "clamp(32px,5vw,56px)" }}>
+        <Reveal>
+          <div className="wrap">
+            <span className="eyebrow-mark">Trusted by</span>
           </div>
-        </div>
+          <div className="clients-marquee">
+            <div className="clients-track">
+              {[...clients, ...clients].map((c, i) =>
+                c.logoUrl ? (
+                  <img key={`${c._id}-${i}`} className="client-chip" src={c.logoUrl} alt={c.name} />
+                ) : (
+                  <span
+                    className="client-chip client-chip-text"
+                    key={`${c._id}-${i}`}
+                  >
+                    {c.name}
+                  </span>
+                )
+              )}
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* ---- portfolio / selected work ---- */}

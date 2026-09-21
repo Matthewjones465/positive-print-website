@@ -76,12 +76,15 @@ const FALLBACK_SERVICES: Service[] = [
 ];
 
 const FALLBACK_CLIENTS: ClientLogoItem[] = [
-  { _id: "c1", name: "DStv", logoUrl: null },
-  { _id: "c2", name: "EY", logoUrl: null },
-  { _id: "c3", name: "Investec", logoUrl: null },
-  { _id: "c4", name: "SPAR", logoUrl: null },
-  { _id: "c5", name: "Illovo", logoUrl: null },
-  { _id: "c6", name: "Debonairs", logoUrl: null },
+  { _id: "c1", name: "DStv", logoUrl: "/clients/dstv.png" },
+  { _id: "c2", name: "EY", logoUrl: "/clients/ey.png" },
+  { _id: "c3", name: "SPAR", logoUrl: "/clients/spar.png" },
+  { _id: "c4", name: "Illovo", logoUrl: "/clients/illovo.png" },
+  { _id: "c5", name: "Debonairs", logoUrl: "/clients/debonairs.png" },
+  { _id: "c6", name: "SA Medical", logoUrl: "/clients/sa-medical.png" },
+  { _id: "c7", name: "KZN Tourism & Film Authority", logoUrl: "/clients/kzntfa.png" },
+  { _id: "c8", name: "Hilton College", logoUrl: "/clients/hilton-college.png" },
+  { _id: "c9", name: "Skyy Aviation Academy", logoUrl: "/clients/skyy.png" },
 ];
 
 const FALLBACK_PORTFOLIO: PortfolioItem[] = [
