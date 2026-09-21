@@ -13,7 +13,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Public+Sans:wght@400;500;600;700&display=swap"
         />
       </head>
       <body>{children}</body>

@@ -60,9 +60,9 @@ html, body {
   a{color:inherit;}
 
   .display{
-    font-family:'Fraunces', Georgia, 'Times New Roman', serif;
-    font-optical-sizing:auto;
-    font-weight:500;
+    font-family:'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.02em;
     text-wrap:balance;
   }
   .label{
@@ -262,13 +262,13 @@ html, body {
     min-height:180px;
   }
   .service-card .num{
-    font-family:'Fraunces', serif;
+    font-family:'Instrument Sans', sans-serif;
     font-style:italic;
     font-size:1rem;
     color:var(--ink-soft);
   }
   .service-card h3{
-    font-family:'Fraunces', serif;
+    font-family:'Instrument Sans', sans-serif;
     font-weight:500;
     font-size:1.28rem;
     margin:0;
@@ -318,7 +318,7 @@ html, body {
     margin-bottom:6px;
   }
   .p-card h3{
-    font-family:'Fraunces', serif;
+    font-family:'Instrument Sans', sans-serif;
     font-weight:500;
     font-size:1.5rem;
     margin:0;
@@ -358,7 +358,7 @@ html, body {
     margin-bottom:16px;
   }
   .phase-card h3{
-    font-family:'Fraunces',serif;
+    font-family:'Instrument Sans', sans-serif;
     font-weight:500;
     font-size:1.4rem;
     margin:0 0 10px;
@@ -464,7 +464,7 @@ html, body {
     color:var(--accent-deep);
   }
   .cat-card-body h3{
-    font-family:'Fraunces', serif;
+    font-family:'Instrument Sans', sans-serif;
     font-weight:500;
     font-size:1.02rem;
     margin:2px 0 4px;
@@ -529,7 +529,7 @@ html, body {
     min-width:170px;
   }
   .own-badge .pct{
-    font-family:'Fraunces',serif;
+    font-family:'Instrument Sans', sans-serif;
     font-weight:500;
     font-size:2.1rem;
     line-height:1;
@@ -545,8 +545,8 @@ html, body {
     border-top:1px solid var(--line);
   }
   .pillar:last-child{ border-bottom:1px solid var(--line); }
-  .pillar .mk{ font-family:'Fraunces',serif; font-style:italic; color:var(--accent-deep); font-size:1.1rem; padding-top:2px; }
-  .pillar h4{ margin:0 0 4px; font-family:'Fraunces',serif; font-weight:500; font-size:1.08rem; }
+  .pillar .mk{ font-family:'Instrument Sans', sans-serif; font-style:italic; color:var(--accent-deep); font-size:1.1rem; padding-top:2px; }
+  .pillar h4{ margin:0 0 4px; font-family:'Instrument Sans', sans-serif; font-weight:500; font-size:1.08rem; }
   .pillar p{ margin:0; color:var(--ink-soft); font-size:0.92rem; line-height:1.55; }
 
   /* ---- CTA / contact ---- */
@@ -639,3 +639,209 @@ html, body {
     gap:10px;
     font-size:0.8rem;
   }
+
+  /* ================= v2 redesign: Origin-inspired structure, Positive palette ================= */
+
+  /* three-segment button (icon box + label + optional thumb) */
+  .seg-btn{
+    display:inline-flex;
+    align-items:stretch;
+    border-radius:8px;
+    overflow:hidden;
+    text-decoration:none;
+    border:1px solid var(--ink);
+    transition:transform .15s ease;
+  }
+  .seg-btn:hover{ transform:translateY(-1px); }
+  .seg-btn .seg-icon{
+    display:flex; align-items:center; justify-content:center;
+    width:52px; flex:none;
+    background:var(--accent-deep);
+    color:var(--accent-ink);
+    font-size:1.1rem;
+  }
+  .seg-btn .seg-label{
+    display:flex; align-items:center;
+    padding:0 22px;
+    background:var(--ink);
+    color:var(--paper);
+    font-weight:700;
+    font-size:0.86rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .seg-btn .seg-thumb{
+    width:52px; flex:none;
+    background-size:cover;
+    background-position:center;
+    background-color:var(--paper-2);
+  }
+  .seg-btn.seg-btn-light .seg-label{ background:var(--card); color:var(--ink); }
+
+  /* eyebrow with diamond mark, Origin-style */
+  .eyebrow-mark{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:0.8rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em;
+    color:var(--ink-soft);
+    margin-bottom:18px;
+  }
+  .eyebrow-mark::before{
+    content:"";
+    width:9px; height:9px;
+    background:var(--accent-deep);
+    transform:rotate(45deg);
+    flex:none;
+  }
+
+  /* full-bleed statement section */
+  .statement{
+    position:relative;
+    min-height:clamp(360px,52vw,620px);
+    display:flex;
+    align-items:flex-end;
+    background:var(--ink);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .statement-media{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(120% 90% at 30% 20%, color-mix(in srgb, var(--accent-deep) 55%, transparent), transparent 60%),
+      linear-gradient(200deg, var(--paper-2), var(--ink) 70%);
+    opacity:0.9;
+  }
+  .statement-content{
+    position:relative;
+    z-index:1;
+    padding:clamp(28px,5vw,56px) 0;
+    width:100%;
+  }
+  .statement h2{
+    color:var(--paper);
+    font-size:clamp(1.7rem,5vw,3.4rem);
+    text-transform:uppercase;
+    line-height:1.08;
+    margin:0;
+    max-width:20ch;
+  }
+
+  /* capabilities big list */
+  .cap-section{ background:var(--ink); color:var(--paper); border-bottom:none; }
+  .cap-section .eyebrow-mark{ color:color-mix(in srgb, var(--paper) 65%, transparent); justify-content:center; }
+  .cap-section .eyebrow-mark::before{ background:var(--accent); }
+  .cap-head{ text-align:center; margin-bottom:clamp(28px,5vw,52px); }
+  .cap-list{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .cap-item{
+    font-size:clamp(1.6rem,5vw,2.8rem);
+    font-weight:600;
+    font-family:'Instrument Sans', sans-serif;
+    color:color-mix(in srgb, var(--paper) 30%, transparent);
+    transition:color .25s ease;
+    text-align:center;
+  }
+  .cap-item.is-active{ color:var(--paper); }
+
+  /* FAQ */
+  .faq-section{ background:var(--paper-2); }
+  .faq-intro h2{ margin:0 0 6px; }
+  .faq-contact{ display:flex; gap:24px; flex-wrap:wrap; margin:22px 0 36px; }
+  .faq-contact a{
+    display:inline-flex; align-items:center; gap:10px;
+    text-decoration:none; color:var(--ink); font-weight:600;
+  }
+  .faq-contact .ico{
+    display:flex; align-items:center; justify-content:center;
+    width:38px; height:38px; border-radius:999px;
+    background:var(--card); border:1px solid var(--line-strong);
+    color:var(--accent-deep); font-size:1rem;
+  }
+  .faq-list{ display:flex; flex-direction:column; gap:14px; }
+  .faq-row{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px 22px;
+  }
+  .faq-row-head{
+    display:flex; align-items:center; gap:18px;
+    justify-content:space-between;
+    cursor:pointer;
+    background:none; border:none; width:100%;
+    text-align:left; font:inherit; color:inherit;
+    padding:0;
+  }
+  .faq-num{ font-size:0.95rem; color:var(--ink-soft); font-weight:700; flex:none; width:26px; }
+  .faq-q{ flex:1; font-weight:600; font-size:1.02rem; }
+  .faq-chevron{ transition:transform .2s ease; color:var(--ink-soft); flex:none; }
+  .faq-row.is-open .faq-chevron{ transform:rotate(180deg); }
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    color:var(--ink-soft);
+    line-height:1.6;
+    font-size:0.96rem;
+  }
+  .faq-row.is-open .faq-a{ max-height:240px; margin-top:14px; }
+
+  /* expanded footer */
+  .footer-expanded{
+    background:var(--ink);
+    color:color-mix(in srgb, var(--paper) 70%, transparent);
+    border-bottom:none;
+    padding-block:clamp(48px,7vw,80px) 0;
+  }
+  .footer-cols{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:clamp(28px,5vw,48px);
+    margin-bottom:clamp(40px,7vw,72px);
+  }
+  @media (max-width:700px){ .footer-cols{ grid-template-columns:1fr; } }
+  .footer-col-label{
+    font-size:0.74rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.08em;
+    color:color-mix(in srgb, var(--paper) 50%, transparent);
+    margin-bottom:16px;
+  }
+  .footer-col a, .footer-col p{
+    display:block;
+    color:var(--paper);
+    text-decoration:none;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .footer-col p{ color:color-mix(in srgb, var(--paper) 68%, transparent); font-weight:400; }
+  .footer-col a:hover{ color:var(--accent); }
+  .footer-wordmark{
+    border-top:1px solid color-mix(in srgb, var(--paper) 16%, transparent);
+    padding-block:clamp(18px,4vw,32px);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .footer-wordmark .word{
+    font-family:'Instrument Sans', sans-serif;
+    font-weight:700;
+    font-size:clamp(2.6rem,10vw,7rem);
+    line-height:0.9;
+    color:var(--paper);
+    margin:0;
+    letter-spacing:-0.02em;
+  }
+  .footer-wordmark .meta{
+    font-size:0.8rem;
+    color:color-mix(in srgb, var(--paper) 55%, transparent);
+  }
+
+  /* scroll-reveal */
+  .reveal{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .reveal.is-visible{ opacity:1; transform:none; }
