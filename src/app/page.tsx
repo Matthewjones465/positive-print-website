@@ -298,6 +298,7 @@ export default async function Home() {
       {/* ---- expanded footer ---- */}
       <footer className="footer-expanded">
         <div className="wrap">
+          <img src="/logo-mark-white.png" alt="Positive Print & Promotion" className="footer-mark" />
           <div className="footer-cols">
             <div className="footer-col">
               <div className="footer-col-label">01 / Quick links</div>

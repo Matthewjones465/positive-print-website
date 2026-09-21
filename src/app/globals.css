@@ -793,6 +793,11 @@ html, body {
     border-bottom:none;
     padding-block:clamp(48px,7vw,80px) 0;
   }
+  .footer-mark{
+    height:40px;
+    width:auto;
+    margin-bottom:clamp(32px,5vw,56px);
+  }
   .footer-cols{
     display:grid;
     grid-template-columns:repeat(3,1fr);
