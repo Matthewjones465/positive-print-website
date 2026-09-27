@@ -61,7 +61,7 @@ export async function getInstagramPosts(): Promise<InstagramPost[]> {
   ].join(",");
 
   const url =
-    `https://graph.facebook.com/${GRAPH_API_VERSION}/${accountId}/media` +
+    `https://graph.instagram.com/${GRAPH_API_VERSION}/${accountId}/media` +
     `?fields=${fields}&limit=${MAX_POSTS}&access_token=${accessToken}`;
 
   try {
