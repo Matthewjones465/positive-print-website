@@ -25,21 +25,11 @@ html, body {
     --paper-2-fixed:#2a2723;
     --on-ink-fixed:#f3efe4;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#211f1c;
-      --paper-2:#2a2723;
-      --ink:#f3efe4;
-      --ink-soft:#b8b1a4;
-      --accent:#e8e14a;
-      --accent-deep:#c9c22e;
-      --accent-ink:#211f1c;
-      --line: rgba(243,239,228,0.16);
-      --line-strong: rgba(243,239,228,0.32);
-      --card:#2a2723;
-      --shadow: rgba(0,0,0,0.45);
-    }
-  }
+  /* NOTE: the site intentionally does NOT invert to a dark theme based on
+     the visitor's OS color-scheme preference. Positive Print & Promotion's
+     brand is a consistent off-white/paper background at all times; only the
+     specific "-fixed" dark accent sections (statement, capabilities, CTA,
+     footer) are ever dark, by design, not by visitor preference. */
   :root[data-theme="dark"]{
     --paper:#211f1c;
     --paper-2:#2a2723;
@@ -891,3 +881,47 @@ html, body {
     transition:opacity .5s ease, transform .5s ease;
   }
   .reveal.is-visible{ opacity:1; transform:none; }
+
+/* ---- real imagery: hero / about / services (added) ---- */
+.hero{ position:relative; overflow:hidden; }
+.hero-media{
+  position:absolute; inset:0; z-index:0;
+  background-size:cover; background-position:center;
+}
+.hero-media::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(100deg, var(--paper) 0%, color-mix(in srgb, var(--paper) 78%, transparent) 32%, color-mix(in srgb, var(--paper) 18%, transparent) 62%, transparent 85%);
+}
+.hero > .wrap{ position:relative; z-index:1; }
+
+.about-grid{
+  display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(28px,5vw,64px);
+  align-items:center;
+}
+.about-media{
+  border-radius:20px; overflow:hidden; aspect-ratio:4/5;
+  background-size:cover; background-position:center;
+  border:1px solid var(--line);
+}
+@media (max-width:860px){
+  .about-grid{ grid-template-columns:1fr; }
+  .about-media{ order:-1; aspect-ratio:16/10; }
+}
+
+.services-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
+  margin-top:8px;
+}
+.service-card{
+  border-radius:16px; overflow:hidden; border:1px solid var(--line);
+  background:var(--card); display:flex; flex-direction:column;
+}
+.service-card-media{
+  aspect-ratio:4/3; background-size:cover; background-position:center;
+  background-color:var(--paper-2);
+}
+.service-card-body{ padding:20px 22px 24px; }
+.service-card-body h3{ margin:0 0 8px; font-size:1.05rem; }
+.service-card-body p{ margin:0; font-size:0.92rem; line-height:1.55; color:var(--ink-soft); }
+@media (max-width:960px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:620px){ .services-grid{ grid-template-columns:1fr; } }

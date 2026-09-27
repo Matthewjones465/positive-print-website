@@ -6,8 +6,8 @@ import {
   getJournalPosts,
 } from "@/lib/content";
 import Reveal from "./Reveal";
-import CapabilitiesList from "./CapabilitiesList";
 import FAQAccordion from "./FAQAccordion";
+import { PortableText } from "@portabletext/react";
 
 export const revalidate = 300;
 
@@ -42,6 +42,22 @@ function splitHeadline(headline: string) {
   return { before: headline.slice(0, idx), emphasis: headline.slice(idx + 1) };
 }
 
+const SERVICE_IMAGE_MAP: [RegExp, string][] = [
+  [/apparel/i, "/images/services/apparel.jpg"],
+  [/signage|vehicle|wrap/i, "/images/services/fleet-wrap.jpg"],
+  [/in-store|outdoor/i, "/images/services/outdoor-branding.jpg"],
+  [/design|print|stationery|collateral/i, "/images/services/printed-stationery.jpg"],
+  [/promotional|gift/i, "/images/services/promotional-products.jpg"],
+  [/packaging|label/i, "/images/services/labels-and-print.jpg"],
+];
+
+function serviceImage(title: string): string {
+  for (const [pattern, src] of SERVICE_IMAGE_MAP) {
+    if (pattern.test(title)) return src;
+  }
+  return "/images/services/apparel.jpg";
+}
+
 export default async function Home() {
   const [settings, services, portfolio, clients, journalPosts] = await Promise.all([
     getSiteSettings(),
@@ -73,13 +89,12 @@ export default async function Home() {
       </div>
 
       {/* ---- hero ---- */}
-      <header
-        className="hero"
-        style={{
-          background:
-            "radial-gradient(120% 90% at 80% 0%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 55%), linear-gradient(165deg, var(--paper-2), var(--paper))",
-        }}
-      >
+      <header className="hero">
+        <div
+          className="hero-media"
+          style={{ backgroundImage: "url(/images/hero/hero.jpg)" }}
+          aria-hidden="true"
+        />
         <div className="wrap">
           <span className="hero-tag">{settings.heroTag}</span>
           <h1 className="display">
@@ -107,20 +122,26 @@ export default async function Home() {
 
       {/* ---- about ---- */}
       <section className="section" id="about">
-        <div className="wrap">
+        <div className="wrap about-grid">
           <Reveal>
             <span className="eyebrow-mark">About us</span>
             <h2 className="display" style={{ fontSize: "clamp(1.6rem,3.4vw,2.4rem)", maxWidth: "24ch", marginBottom: "28px" }}>
               {settings.aboutHeadline}
             </h2>
-            <p style={{ maxWidth: "62ch", fontSize: "1.05rem", lineHeight: 1.6, color: "var(--ink-soft)" }}>
-              Positive Print &amp; Promotion exists to prove that{" "}
-              <strong style={{ color: "var(--ink)" }}>bold branding and principled ownership aren&apos;t a trade-off.</strong>{" "}
-              We&apos;re a 100% Woman-owned, 50% Black Woman-owned studio built on the belief
-              that the people shaping South African brands should reflect the country they&apos;re
-              building them in — apparel, signage, packaging and promotional print, all moving
-              through one coordinated studio from first sketch to final delivery.
-            </p>
+            <div style={{ maxWidth: "62ch", fontSize: "1.05rem", lineHeight: 1.6, color: "var(--ink-soft)" }}>
+              {settings.aboutBody ? (
+                <PortableText value={settings.aboutBody} />
+              ) : (
+                <p>
+                  Positive Print &amp; Promotion exists to prove that{" "}
+                  <strong style={{ color: "var(--ink)" }}>bold branding and principled ownership aren&apos;t a trade-off.</strong>{" "}
+                  We&apos;re a 100% Woman-owned, 50% Black Woman-owned studio built on the belief
+                  that the people shaping South African brands should reflect the country they&apos;re
+                  building them in — apparel, signage, packaging and promotional print, all moving
+                  through one coordinated studio from first sketch to final delivery.
+                </p>
+              )}
+            </div>
             <div style={{ marginTop: "32px" }}>
               <a className="seg-btn" href="#services">
                 <span className="seg-icon">↗</span>
@@ -128,6 +149,12 @@ export default async function Home() {
               </a>
             </div>
           </Reveal>
+          <div
+            className="about-media"
+            style={{ backgroundImage: "url(/images/about/about.jpg)" }}
+            role="img"
+            aria-label="Inside the Positive Print & Promotion studio"
+          />
         </div>
       </section>
 
@@ -233,13 +260,27 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ---- capabilities (dark, scroll-highlighted list) ---- */}
+      {/* ---- capabilities / services, with real studio photography ---- */}
       <section className="section cap-section" id="services">
         <div className="wrap">
           <div className="cap-head">
             <span className="eyebrow-mark">Core capabilities</span>
           </div>
-          <CapabilitiesList items={services.map((s) => s.title)} />
+          <div className="services-grid">
+            {services.map((s) => (
+              <div className="service-card" key={s._id}>
+                <div
+                  className="service-card-media"
+                  style={{ backgroundImage: `url(${serviceImage(s.title)})` }}
+                  aria-hidden="true"
+                />
+                <div className="service-card-body">
+                  <h3>{s.title}</h3>
+                  <p>{s.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
