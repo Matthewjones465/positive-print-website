@@ -1,6 +1,5 @@
 import {
   getSiteSettings,
-  getServices,
   getPortfolioItems,
   getClientLogos,
   getJournalPosts,
@@ -42,26 +41,9 @@ function splitHeadline(headline: string) {
   return { before: headline.slice(0, idx), emphasis: headline.slice(idx + 1) };
 }
 
-const SERVICE_IMAGE_MAP: [RegExp, string][] = [
-  [/apparel/i, "/images/services/apparel.jpg"],
-  [/signage|vehicle|wrap/i, "/images/services/fleet-wrap.jpg"],
-  [/in-store|outdoor/i, "/images/services/outdoor-branding.jpg"],
-  [/design|print|stationery|collateral/i, "/images/services/printed-stationery.jpg"],
-  [/promotional|gift/i, "/images/services/promotional-products.jpg"],
-  [/packaging|label/i, "/images/services/labels-and-print.jpg"],
-];
-
-function serviceImage(title: string): string {
-  for (const [pattern, src] of SERVICE_IMAGE_MAP) {
-    if (pattern.test(title)) return src;
-  }
-  return "/images/services/apparel.jpg";
-}
-
 export default async function Home() {
-  const [settings, services, portfolio, clients, journalPosts] = await Promise.all([
+  const [settings, portfolio, clients, journalPosts] = await Promise.all([
     getSiteSettings(),
-    getServices(),
     getPortfolioItems(),
     getClientLogos(),
     getJournalPosts(),
@@ -256,30 +238,6 @@ export default async function Home() {
                 {hasJournalPosts ? "Read the journal →" : "Needs: Instagram Business account connected via Meta's API."}
               </div>
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ---- capabilities / services, with real studio photography ---- */}
-      <section className="section cap-section" id="services">
-        <div className="wrap">
-          <div className="cap-head">
-            <span className="eyebrow-mark">Core capabilities</span>
-          </div>
-          <div className="services-grid">
-            {services.map((s) => (
-              <div className="service-card" key={s._id}>
-                <div
-                  className="service-card-media"
-                  style={{ backgroundImage: `url(${serviceImage(s.title)})` }}
-                  aria-hidden="true"
-                />
-                <div className="service-card-body">
-                  <h3>{s.title}</h3>
-                  <p>{s.description}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

@@ -887,12 +887,18 @@ html, body {
 .hero-media{
   position:absolute; inset:0; z-index:0;
   background-size:cover; background-position:center;
+  filter:grayscale(1);
 }
 .hero-media::after{
   content:""; position:absolute; inset:0;
-  background:linear-gradient(100deg, var(--paper) 0%, color-mix(in srgb, var(--paper) 78%, transparent) 32%, color-mix(in srgb, var(--paper) 18%, transparent) 62%, transparent 85%);
+  background:linear-gradient(100deg, var(--paper) 0%, var(--paper) 20%, color-mix(in srgb, var(--paper) 88%, transparent) 42%, color-mix(in srgb, var(--paper) 40%, transparent) 66%, color-mix(in srgb, var(--paper) 12%, transparent) 100%);
 }
 .hero > .wrap{ position:relative; z-index:1; }
+.hero .hero-tag,
+.hero .display,
+.hero .hero-sub{
+  text-shadow:0 1px 24px color-mix(in srgb, var(--paper) 70%, transparent);
+}
 
 .about-grid{
   display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(28px,5vw,64px);

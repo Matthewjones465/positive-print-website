@@ -88,12 +88,12 @@ const FALLBACK_CLIENTS: ClientLogoItem[] = [
 ];
 
 const FALLBACK_PORTFOLIO: PortfolioItem[] = [
-  { _id: "p1", title: "Teamwear & merch runs", category: "Apparel", imageUrl: null },
-  { _id: "p2", title: "Fleet & vehicle wraps", category: "Signage", imageUrl: null },
-  { _id: "p3", title: "Labels & structural print", category: "Packaging", imageUrl: null },
-  { _id: "p4", title: "Collateral & stationery", category: "Print", imageUrl: null },
-  { _id: "p5", title: "In-store & outdoor", category: "Activations", imageUrl: null },
-  { _id: "p6", title: "Promotional products", category: "Gifting", imageUrl: null },
+  { _id: "p1", title: "Teamwear & merch runs", category: "Apparel", imageUrl: "/images/services/apparel.jpg" },
+  { _id: "p2", title: "Fleet & vehicle wraps", category: "Signage", imageUrl: "/images/services/fleet-wrap.jpg" },
+  { _id: "p3", title: "Labels & structural print", category: "Packaging", imageUrl: "/images/services/labels-and-print.jpg" },
+  { _id: "p4", title: "Collateral & stationery", category: "Print", imageUrl: "/images/services/printed-stationery.jpg" },
+  { _id: "p5", title: "In-store & outdoor", category: "Activations", imageUrl: "/images/services/outdoor-branding.jpg" },
+  { _id: "p6", title: "Promotional products", category: "Gifting", imageUrl: "/images/services/promotional-products.jpg" },
 ];
 
 function isSanityConfigured() {
