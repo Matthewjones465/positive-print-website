@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { getJournalPosts } from "@/lib/content";
+import { getJournalPosts, type JournalPostSummary } from "@/lib/content";
+import { getInstagramPosts, instagramPostTitle, type InstagramPost } from "@/lib/instagram";
 
 export const metadata: Metadata = {
   title: "Journal — Positive Print & Promotion",
@@ -32,8 +33,56 @@ function formatDate(iso: string) {
   }
 }
 
+// A single shape the grid can render regardless of where the post came
+// from — a Sanity-authored journal entry (internal link, own detail page)
+// or an Instagram post (external link, opens on Instagram).
+type FeedItem = {
+  key: string;
+  title: string;
+  excerpt: string | null;
+  imageUrl: string | null;
+  publishedAt: string;
+  href: string;
+  external: boolean;
+  source: "sanity" | "instagram";
+};
+
+function sanityToFeedItem(post: JournalPostSummary): FeedItem {
+  return {
+    key: `sanity-${post._id}`,
+    title: post.title,
+    excerpt: post.excerpt ?? null,
+    imageUrl: post.coverImageUrl,
+    publishedAt: post.publishedAt,
+    href: `/journal/${post.slug}`,
+    external: false,
+    source: "sanity",
+  };
+}
+
+function instagramToFeedItem(post: InstagramPost): FeedItem {
+  return {
+    key: `instagram-${post.id}`,
+    title: instagramPostTitle(post),
+    excerpt: null,
+    imageUrl: post.mediaUrl ?? post.thumbnailUrl,
+    publishedAt: post.timestamp,
+    href: post.permalink,
+    external: true,
+    source: "instagram",
+  };
+}
+
 export default async function JournalPage() {
-  const posts = await getJournalPosts();
+  const [sanityPosts, instagramPosts] = await Promise.all([
+    getJournalPosts(),
+    getInstagramPosts(),
+  ]);
+
+  const feed: FeedItem[] = [
+    ...sanityPosts.map(sanityToFeedItem),
+    ...instagramPosts.map(instagramToFeedItem),
+  ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
   return (
     <>
@@ -45,14 +94,14 @@ export default async function JournalPage() {
           <h1 className="display">From the<br />studio floor</h1>
           <p className="hero-sub">
             Recent projects, behind-the-scenes notes, and updates from the Positive Print
-            & Promotion team.
+            & Promotion team — including our latest from Instagram.
           </p>
         </div>
       </header>
 
       <section className="section">
         <div className="wrap">
-          {posts.length === 0 ? (
+          {feed.length === 0 ? (
             <div className="cat-error">
               <p>
                 No journal posts yet — check back soon, or{" "}
@@ -61,21 +110,32 @@ export default async function JournalPage() {
             </div>
           ) : (
             <div className="cat-grid">
-              {posts.map((post) => (
-                <a key={post._id} className="cat-card" href={`/journal/${post.slug}`}>
+              {feed.map((item) => (
+                <a
+                  key={item.key}
+                  className="cat-card"
+                  href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                >
                   <div className="cat-card-image">
-                    {post.coverImageUrl ? (
+                    {item.imageUrl ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={post.coverImageUrl} alt={post.title} loading="lazy" />
+                      <img src={item.imageUrl} alt={item.title} loading="lazy" />
                     ) : (
                       <div className="cat-card-noimage" />
                     )}
                   </div>
                   <div className="cat-card-body">
-                    <span className="cat-card-category">{formatDate(post.publishedAt)}</span>
-                    <h3>{post.title}</h3>
-                    {post.excerpt && <span className="cat-card-code">{post.excerpt}</span>}
-                    <span className="cat-card-cta">Read more →</span>
+                    <span className="cat-card-category">
+                      {formatDate(item.publishedAt)}
+                      {item.source === "instagram" ? " · Instagram" : ""}
+                    </span>
+                    <h3>{item.title}</h3>
+                    {item.excerpt && <span className="cat-card-code">{item.excerpt}</span>}
+                    <span className="cat-card-cta">
+                      {item.external ? "View on Instagram →" : "Read more →"}
+                    </span>
                   </div>
                 </a>
               ))}

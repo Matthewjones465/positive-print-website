@@ -62,3 +62,24 @@ step for you.
 - Confirm `/api/amrod/token` returns `{"ok":true,...}` in production.
 - Keep your WordPress hosting account active for a few weeks after
   cutover as a fallback, rather than cancelling it immediately.
+
+## 5. Instagram Journal integration
+
+The Studio Journal (`/journal`) blends Sanity-authored posts with your
+latest Instagram posts automatically, once these two Environment Variables
+are set in Vercel (Project → Settings → Environment Variables):
+
+- `INSTAGRAM_ACCESS_TOKEN` — the long-lived Instagram Graph API access
+  token generated via Meta Business Suite / Graph API Explorer.
+- `INSTAGRAM_BUSINESS_ACCOUNT_ID` — the Instagram Business Account ID for
+  @positive_agency_za.
+
+If either variable is missing, or the Graph API request fails for any
+reason, the Journal page simply falls back to showing only Sanity posts —
+nothing breaks. Instagram posts are cached for 5 minutes at a time, same
+as the rest of the site's content.
+
+**Token renewal:** long-lived Instagram tokens expire roughly every 60
+days. When that happens, Instagram posts will quietly stop appearing on
+`/journal` (Sanity posts keep working) until a fresh token is generated
+and updated in Vercel's environment variables.
