@@ -62,7 +62,7 @@ export default async function Home() {
           <nav className="navlinks">
             <a href="#services">Capabilities</a>
             <a href="/catalogue">Catalogue</a>
-            <a href="#journal">Journal</a>
+            <a href="/journal">Journal</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
           </nav>
