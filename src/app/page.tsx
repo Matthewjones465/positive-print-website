@@ -96,7 +96,7 @@ export default async function Home() {
           </div>
           <div className="hero-badges">
             <div className="hero-badge"><span className="swatch"></span>100% Woman-owned</div>
-            <div className="hero-badge"><span className="swatch"></span>50% Black Woman-owned</div>
+            <div className="hero-badge"><span className="swatch"></span>BEE Level 2</div>
             <div className="hero-badge"><span className="swatch"></span>One studio, seven disciplines</div>
           </div>
         </div>
@@ -117,7 +117,7 @@ export default async function Home() {
                 <p>
                   Positive Print &amp; Promotion exists to prove that{" "}
                   <strong style={{ color: "var(--ink)" }}>bold branding and principled ownership aren&apos;t a trade-off.</strong>{" "}
-                  We&apos;re a 100% Woman-owned, 50% Black Woman-owned studio built on the belief
+                  We&apos;re a 100% Woman-owned, BEE Level 2 studio built on the belief
                   that the people shaping South African brands should reflect the country they&apos;re
                   building them in — apparel, signage, packaging and promotional print, all moving
                   through one coordinated studio from first sketch to final delivery.
@@ -186,18 +186,20 @@ export default async function Home() {
           </Reveal>
           <div className="portfolio-grid">
             {portfolio.map((p, i) => (
-              <div
-                className={`p-card ${p.imageUrl ? "" : PORTFOLIO_FALLBACK_CLASS[i % PORTFOLIO_FALLBACK_CLASS.length]}`}
-                key={p._id}
-                style={
-                  p.imageUrl
-                    ? { backgroundImage: `url(${p.imageUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
-                    : undefined
-                }
-              >
-                <div className="p-tag">{String(i + 1).padStart(2, "0")} — {p.category}</div>
-                <h3>{p.title}</h3>
-              </div>
+              <Reveal className="p-card-wrap" delayMs={i * 70} key={p._id}>
+                <div
+                  className={`p-card ${p.imageUrl ? "" : PORTFOLIO_FALLBACK_CLASS[i % PORTFOLIO_FALLBACK_CLASS.length]}`}
+                  style={
+                    p.imageUrl
+                      ? { backgroundImage: `url(${p.imageUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
+                      : undefined
+                  }
+                >
+                  <span className="p-glow" aria-hidden="true" />
+                  <div className="p-tag">{String(i + 1).padStart(2, "0")} — {p.category}</div>
+                  <h3>{p.title}</h3>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
