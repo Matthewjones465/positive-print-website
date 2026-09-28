@@ -306,7 +306,6 @@ export default async function Home() {
       {/* ---- expanded footer ---- */}
       <footer className="footer-expanded">
         <div className="wrap">
-          <img src="/logo-mark-white.png" alt="Positive Print & Promotion" className="footer-mark" />
           <div className="footer-cols">
             <div className="footer-col">
               <div className="footer-col-label">01 / Quick links</div>
@@ -326,7 +325,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="footer-wordmark">
-            <span className="word">POSITIVE</span>
+            <span className="word">If you can dream it, we can do it.</span>
             <span className="meta">© 2026 Positive Print &amp; Promotion — Durban, South Africa</span>
           </div>
         </div>
