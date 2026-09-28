@@ -52,6 +52,7 @@ export default async function Home() {
   ]);
 
   const { before, emphasis } = splitHeadline(settings.heroHeadline);
+  const instagramHandle = settings.instagramHandle.replace(/^@/, "");
   const hasJournalPosts = journalPosts.length > 0 || instagramPosts.length > 0;
   const journalPreviewImages = instagramPosts
     .map((p) => p.mediaUrl ?? p.thumbnailUrl)
@@ -235,10 +236,8 @@ export default async function Home() {
             <a
               className="phase-card"
               id="journal"
-              href={`https://www.instagram.com/${settings.instagramHandle}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: "none", color: "inherit", display: "block" }}
+              href={hasJournalPosts ? "/journal" : "#journal"}
+              style={hasJournalPosts ? { textDecoration: "none", color: "inherit", display: "block" } : undefined}
             >
               <span className="phase-kicker">{hasJournalPosts ? "Live now" : "Planned feature"}</span>
               <h3>Studio journal</h3>
@@ -257,7 +256,7 @@ export default async function Home() {
                 ))}
               </div>
               <div className="note">
-                {hasJournalPosts ? "View on Instagram →" : "Needs: Instagram Business account connected via Meta's API."}
+                {hasJournalPosts ? "Read the journal →" : "Needs: Instagram Business account connected via Meta's API."}
               </div>
             </a>
           </div>
@@ -299,7 +298,7 @@ export default async function Home() {
                 <div className="row"><span className="k">Studio</span><span className="v">{settings.studioAddress}</span></div>
               </div>
               <div className="social-row">
-                <a className="social-chip" href={`https://www.instagram.com/${settings.instagramHandle}`} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <a className="social-chip" href={`https://www.instagram.com/${instagramHandle}`} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <span className="social-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8">
                       <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -307,7 +306,7 @@ export default async function Home() {
                       <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none" />
                     </svg>
                   </span>
-                  <span>@{settings.instagramHandle}</span>
+                  <span>@{instagramHandle}</span>
                 </a>
               </div>
             </div>
@@ -350,7 +349,7 @@ export default async function Home() {
               <div className="footer-col-label">03 / Socials</div>
               <a
                 className="footer-social"
-                href={`https://www.instagram.com/${settings.instagramHandle}`}
+                href={`https://www.instagram.com/${instagramHandle}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -361,7 +360,7 @@ export default async function Home() {
                     <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none" />
                   </svg>
                 </span>
-                <span>Instagram — @{settings.instagramHandle}</span>
+                <span>Instagram — @{instagramHandle}</span>
               </a>
             </div>
           </div>
