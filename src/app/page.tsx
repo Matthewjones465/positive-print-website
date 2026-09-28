@@ -219,25 +219,31 @@ export default async function Home() {
               <span className="phase-kicker">Live now</span>
               <h3>Product catalogue</h3>
               <p>Scroll through promotional products by category, view details, and enquire directly — live from our supplier feed.</p>
-              <div className="phase-mock"><div className="sw"></div><div className="sw"></div><div className="sw"></div></div>
+              <div className="phase-mock">
+                <div className="sw has-img" style={{ backgroundImage: "url(/images/services/catalogue-1.jpg)" }}></div>
+                <div className="sw has-img" style={{ backgroundImage: "url(/images/services/catalogue-2.jpg)" }}></div>
+                <div className="sw has-img" style={{ backgroundImage: "url(/images/services/catalogue-3.jpg)" }}></div>
+              </div>
               <div className="note">Browse the full catalogue →</div>
             </a>
             <a
               className="phase-card"
               id="journal"
-              href={hasJournalPosts ? "/journal" : "#journal"}
-              style={hasJournalPosts ? { textDecoration: "none", color: "inherit", display: "block" } : undefined}
+              href={`https://www.instagram.com/${settings.instagramHandle}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none", color: "inherit", display: "block" }}
             >
               <span className="phase-kicker">{hasJournalPosts ? "Live now" : "Planned feature"}</span>
               <h3>Studio journal</h3>
               <p>
                 {hasJournalPosts
-                  ? "Recent projects and studio updates, written straight from the floor."
+                  ? "Behind-the-scenes notes from live activations, brand launches, and print runs — a running record of the work we do for clients across events, marketing, branding, and promotional print. Straight from the floor, straight from our Instagram."
                   : "An interactive blog pulling in real project imagery, connected to Instagram so the site updates as new work gets posted."}
               </p>
               <div className="phase-mock"><div className="sw"></div><div className="sw"></div><div className="sw"></div></div>
               <div className="note">
-                {hasJournalPosts ? "Read the journal →" : "Needs: Instagram Business account connected via Meta's API."}
+                {hasJournalPosts ? "View on Instagram →" : "Needs: Instagram Business account connected via Meta's API."}
               </div>
             </a>
           </div>
