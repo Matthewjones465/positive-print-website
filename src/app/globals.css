@@ -682,12 +682,31 @@ html, body {
 
   .social-row{ display:flex; gap:10px; margin-top:26px; flex-wrap:wrap; }
   .social-chip{
-    display:inline-flex; align-items:center; gap:8px;
+    display:inline-flex; align-items:center; gap:10px;
     border:1px solid color-mix(in srgb, var(--paper) 30%, transparent);
-    border-radius:999px; padding:9px 16px; font-size:0.84rem; font-weight:600;
+    border-radius:999px; padding:9px 18px 9px 9px; font-size:0.86rem; font-weight:600;
     text-decoration:none; color:var(--paper);
+    background:color-mix(in srgb, var(--paper) 6%, transparent);
+    transition:border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
   }
-  .social-chip:hover{ border-color:var(--paper); }
+  .social-chip:hover{
+    border-color:var(--accent-deep);
+    background:color-mix(in srgb, var(--accent) 16%, transparent);
+    transform:translateY(-1px);
+  }
+  .social-icon{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:30px; height:30px; border-radius:50%; flex:none;
+    background:linear-gradient(135deg,#f9ce34,#ee2a7b 55%,#6228d7);
+    color:#fff;
+  }
+  .social-chip .social-icon{ width:28px; height:28px; }
+  .footer-social{
+    display:inline-flex !important;
+    align-items:center;
+    gap:10px;
+  }
+  .footer-social .social-icon{ width:24px; height:24px; }
 
   .form-card{
     background:color-mix(in srgb, var(--paper) 8%, transparent);

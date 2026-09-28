@@ -4,6 +4,7 @@ import {
   getClientLogos,
   getJournalPosts,
 } from "@/lib/content";
+import { getInstagramPosts } from "@/lib/instagram";
 import Reveal from "./Reveal";
 import FAQAccordion from "./FAQAccordion";
 import { PortableText } from "@portabletext/react";
@@ -42,15 +43,20 @@ function splitHeadline(headline: string) {
 }
 
 export default async function Home() {
-  const [settings, portfolio, clients, journalPosts] = await Promise.all([
+  const [settings, portfolio, clients, journalPosts, instagramPosts] = await Promise.all([
     getSiteSettings(),
     getPortfolioItems(),
     getClientLogos(),
     getJournalPosts(),
+    getInstagramPosts(),
   ]);
 
   const { before, emphasis } = splitHeadline(settings.heroHeadline);
-  const hasJournalPosts = journalPosts.length > 0;
+  const hasJournalPosts = journalPosts.length > 0 || instagramPosts.length > 0;
+  const journalPreviewImages = instagramPosts
+    .map((p) => p.mediaUrl ?? p.thumbnailUrl)
+    .filter((url): url is string => Boolean(url))
+    .slice(0, 3);
 
   return (
     <>
@@ -241,7 +247,15 @@ export default async function Home() {
                   ? "Behind-the-scenes notes from live activations, brand launches, and print runs — a running record of the work we do for clients across events, marketing, branding, and promotional print. Straight from the floor, straight from our Instagram."
                   : "An interactive blog pulling in real project imagery, connected to Instagram so the site updates as new work gets posted."}
               </p>
-              <div className="phase-mock"><div className="sw"></div><div className="sw"></div><div className="sw"></div></div>
+              <div className="phase-mock">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className={journalPreviewImages[i] ? "sw has-img" : "sw"}
+                    style={journalPreviewImages[i] ? { backgroundImage: `url(${journalPreviewImages[i]})` } : undefined}
+                  ></div>
+                ))}
+              </div>
               <div className="note">
                 {hasJournalPosts ? "View on Instagram →" : "Needs: Instagram Business account connected via Meta's API."}
               </div>
@@ -285,8 +299,15 @@ export default async function Home() {
                 <div className="row"><span className="k">Studio</span><span className="v">{settings.studioAddress}</span></div>
               </div>
               <div className="social-row">
-                <a className="social-chip" href={`https://www.instagram.com/${settings.instagramHandle}`} target="_blank" rel="noopener" aria-label="Instagram">
-                  Instagram — @{settings.instagramHandle}
+                <a className="social-chip" href={`https://www.instagram.com/${settings.instagramHandle}`} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <span className="social-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <rect x="3" y="3" width="18" height="18" rx="5" />
+                      <circle cx="12" cy="12" r="4" />
+                      <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none" />
+                    </svg>
+                  </span>
+                  <span>@{settings.instagramHandle}</span>
                 </a>
               </div>
             </div>
@@ -327,7 +348,21 @@ export default async function Home() {
             </div>
             <div className="footer-col">
               <div className="footer-col-label">03 / Socials</div>
-              <a href={`https://www.instagram.com/${settings.instagramHandle}`} target="_blank" rel="noopener">Instagram</a>
+              <a
+                className="footer-social"
+                href={`https://www.instagram.com/${settings.instagramHandle}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="social-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <rect x="3" y="3" width="18" height="18" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none" />
+                  </svg>
+                </span>
+                <span>Instagram — @{settings.instagramHandle}</span>
+              </a>
             </div>
           </div>
           <div className="footer-wordmark">
