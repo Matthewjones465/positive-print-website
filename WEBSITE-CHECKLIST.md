@@ -9,13 +9,15 @@ A running checklist of gaps and improvements. Check items off as they ship. Last
 - [x] Add `sitemap.xml` and `robots.txt` for Google indexing
 - [x] Add Vercel Analytics (or GA4) so there's visibility into real traffic and conversion
 - [x] Convert plain `<img>` tags to `next/image` across the site for responsive sizing, lazy-loading, and modern image formats (WebP/AVIF) — done for logo, hero, about, client logos, and all journal images. Catalogue product images intentionally left as plain `<img>` since they come from Amrod's live supplier feed on an unpredictable CDN domain.
-- [ ] Confirm the contact form ("Send enquiry") actually submits somewhere structured (CRM/email/Sanity) rather than just a mailto link
+- [x] Quick fix: "Send enquiry" now reads the actual form fields and builds a pre-filled mailto email (was previously a blank mailto link, silently discarding anything typed). Proper fix (Resend-powered direct email send) is blocked waiting on DNS access from the hosting provider (Virtually There Hosting) — see below.
 
 - [x] Add WhatsApp integration — floating button site-wide, plus chips in the contact section and footer, linking to wa.me with +27 71 609 3755
 
 - [x] Compress oversized source images (catalogue-2.jpg was 3MB/2362px for a small swatch — now 163KB) and convert all remaining CSS background-images (portfolio grid, catalogue swatches, journal preview swatches) to next/image
 - [x] Add LocalBusiness (ProfessionalService) JSON-LD structured data for local SEO
 - [x] Add keyword-rich homepage-specific metadata (previously inherited only the generic site default)
+
+- [ ] BLOCKED: finish Resend domain verification (need DNS login from Virtually There Hosting client) and build proper server-side enquiry email sending
 
 ## Pass 2 — Content completeness (Sanity CMS)
 

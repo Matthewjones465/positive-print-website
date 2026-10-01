@@ -7,6 +7,7 @@ import {
 import { getInstagramPosts } from "@/lib/instagram";
 import Image from "next/image";
 import Reveal from "./Reveal";
+import EnquiryForm from "./EnquiryForm";
 import FAQAccordion from "./FAQAccordion";
 import { PortableText } from "@portabletext/react";
 
@@ -394,21 +395,7 @@ export default async function Home() {
                 </a>
               </div>
             </div>
-            <div className="form-card">
-              <div className="field-row">
-                <div className="field"><span className="f-label">Name</span><input type="text" id="cf-name" placeholder="Your name" /></div>
-                <div className="field"><span className="f-label">Company</span><input type="text" id="cf-company" placeholder="Company" /></div>
-              </div>
-              <div className="field-row">
-                <div className="field"><span className="f-label">Email</span><input type="email" id="cf-email" placeholder="you@company.com" /></div>
-                <div className="field"><span className="f-label">Phone</span><input type="tel" id="cf-phone" placeholder="083 000 0000" /></div>
-              </div>
-              <div className="field">
-                <span className="f-label">What do you need printed?</span>
-                <textarea id="cf-brief" placeholder="Tell us about the project, timeline and quantities…"></textarea>
-              </div>
-              <a className="btn-primary" href={`mailto:${settings.email}`}>Send enquiry</a>
-            </div>
+<EnquiryForm email={settings.email} />
           </div>
         </div>
       </section>
