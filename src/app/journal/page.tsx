@@ -4,7 +4,7 @@ import { getJournalPosts, type JournalPostSummary } from "@/lib/content";
 import { getInstagramPosts, instagramPostTitle, type InstagramPost } from "@/lib/instagram";
 
 export const metadata: Metadata = {
-  title: "Journal — Positive Print & Promotion",
+  title: "Journal",
   description: "Recent projects and studio updates from Positive Print & Promotion.",
 };
 

@@ -3,7 +3,7 @@ import { getAmrodCatalogue } from "@/lib/amrod";
 import CatalogueBrowser from "./CatalogueBrowser";
 
 export const metadata: Metadata = {
-  title: "Catalogue — Positive Print & Promotion",
+  title: "Catalogue",
   description:
     "Browse our full range of promotional products — apparel, gifting, signage accessories and more.",
 };
