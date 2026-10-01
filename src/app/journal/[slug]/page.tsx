@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { getJournalPost } from "@/lib/content";
@@ -67,12 +68,15 @@ export default async function JournalPostPage({
       <section className="section">
         <div className="wrap" style={{ maxWidth: "760px" }}>
           {post.coverImageUrl && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={post.coverImageUrl}
-              alt={post.title}
-              style={{ width: "100%", borderRadius: "12px", marginBottom: "2rem" }}
-            />
+            <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", borderRadius: "12px", overflow: "hidden", marginBottom: "2rem" }}>
+              <Image
+                src={post.coverImageUrl}
+                alt={post.title}
+                fill
+                sizes="(max-width: 760px) 100vw, 760px"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           )}
           {post.body && <PortableText value={post.body} />}
           <p style={{ marginTop: "3rem" }}>

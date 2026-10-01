@@ -5,6 +5,7 @@ import {
   getJournalPosts,
 } from "@/lib/content";
 import { getInstagramPosts } from "@/lib/instagram";
+import Image from "next/image";
 import Reveal from "./Reveal";
 import FAQAccordion from "./FAQAccordion";
 import { PortableText } from "@portabletext/react";
@@ -53,6 +54,10 @@ export default async function Home() {
 
   const { before, emphasis } = splitHeadline(settings.heroHeadline);
   const instagramHandle = settings.instagramHandle.replace(/^@/, "");
+  const whatsappNumber = settings.phone.replace(/\D/g, "").replace(/^0/, "27");
+  const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    "Hi Positive Print & Promotion, I'd like to get a quote."
+  )}`;
   const hasJournalPosts = journalPosts.length > 0 || instagramPosts.length > 0;
   const journalPreviewImages = instagramPosts
     .map((p) => p.mediaUrl ?? p.thumbnailUrl)
@@ -64,7 +69,7 @@ export default async function Home() {
       <div className="topbar">
         <div className="wrap topbar-inner">
           <div className="brand">
-            <img src="/logo.png" alt="Positive Print & Promotion" />
+            <Image src="/logo.png" alt="Positive Print & Promotion" width={160} height={40} priority />
           </div>
           <nav className="navlinks">
             <a href="#services">Capabilities</a>
@@ -79,11 +84,16 @@ export default async function Home() {
 
       {/* ---- hero ---- */}
       <header className="hero">
-        <div
-          className="hero-media"
-          style={{ backgroundImage: "url(/images/hero/hero.jpg)" }}
-          aria-hidden="true"
-        />
+        <div className="hero-media" aria-hidden="true">
+          <Image
+            src="/images/hero/hero.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover" }}
+          />
+        </div>
         <div className="wrap">
           <span className="hero-tag">{settings.heroTag}</span>
           <h1 className="display">
@@ -138,12 +148,15 @@ export default async function Home() {
               </a>
             </div>
           </Reveal>
-          <div
-            className="about-media"
-            style={{ backgroundImage: "url(/images/about/about.jpg)" }}
-            role="img"
-            aria-label="Inside the Positive Print & Promotion studio"
-          />
+          <div className="about-media" role="img" aria-label="Inside the Positive Print & Promotion studio">
+            <Image
+              src="/images/about/about.jpg"
+              alt=""
+              fill
+              sizes="(max-width: 860px) 100vw, 45vw"
+              style={{ objectFit: "cover" }}
+            />
+          </div>
         </div>
       </section>
 
@@ -167,7 +180,15 @@ export default async function Home() {
             <div className="clients-track">
               {[...clients, ...clients].map((c, i) =>
                 c.logoUrl ? (
-                  <img key={`${c._id}-${i}`} className="client-chip" src={c.logoUrl} alt={c.name} />
+                  <Image
+                    key={`${c._id}-${i}`}
+                    className="client-chip"
+                    src={c.logoUrl}
+                    alt={c.name}
+                    width={160}
+                    height={64}
+                    style={{ width: "auto", height: "64px" }}
+                  />
                 ) : (
                   <span
                     className="client-chip client-chip-text"
@@ -308,6 +329,14 @@ export default async function Home() {
                   </span>
                   <span>@{instagramHandle}</span>
                 </a>
+                <a className="social-chip social-chip-whatsapp" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                  <span className="social-icon social-icon-whatsapp" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                      <path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.76.46 3.45 1.33 4.95L2 22l5.2-1.36A9.96 9.96 0 0 0 12.04 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.2c-1.6 0-3.17-.43-4.54-1.24l-.33-.2-3.09.81.82-3-.21-.34a8.18 8.18 0 0 1-1.25-4.23c0-4.53 3.68-8.21 8.2-8.21 2.19 0 4.25.86 5.8 2.41a8.14 8.14 0 0 1 2.4 5.8c.01 4.53-3.67 8.2-8.2 8.2zm4.49-6.15c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.17.25-.63.8-.78.96-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.42 1.02 2.59.12.17 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.17-.06-.11-.22-.17-.47-.29z"/>
+                    </svg>
+                  </span>
+                  <span>WhatsApp us</span>
+                </a>
               </div>
             </div>
             <div className="form-card">
@@ -362,6 +391,20 @@ export default async function Home() {
                 </span>
                 <span>Instagram — @{instagramHandle}</span>
               </a>
+              <a
+                className="footer-social"
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ marginTop: "10px" }}
+              >
+                <span className="social-icon social-icon-whatsapp" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.76.46 3.45 1.33 4.95L2 22l5.2-1.36A9.96 9.96 0 0 0 12.04 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.2c-1.6 0-3.17-.43-4.54-1.24l-.33-.2-3.09.81.82-3-.21-.34a8.18 8.18 0 0 1-1.25-4.23c0-4.53 3.68-8.21 8.2-8.21 2.19 0 4.25.86 5.8 2.41a8.14 8.14 0 0 1 2.4 5.8c.01 4.53-3.67 8.2-8.2 8.2zm4.49-6.15c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.17.25-.63.8-.78.96-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.42 1.02 2.59.12.17 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.17-.06-.11-.22-.17-.47-.29z"/>
+                  </svg>
+                </span>
+                <span>WhatsApp us</span>
+              </a>
             </div>
           </div>
           <div className="footer-wordmark">
@@ -370,6 +413,18 @@ export default async function Home() {
           </div>
         </div>
       </footer>
+
+      <a
+        className="whatsapp-float"
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat to us on WhatsApp"
+      >
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+          <path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.76.46 3.45 1.33 4.95L2 22l5.2-1.36A9.96 9.96 0 0 0 12.04 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.2c-1.6 0-3.17-.43-4.54-1.24l-.33-.2-3.09.81.82-3-.21-.34a8.18 8.18 0 0 1-1.25-4.23c0-4.53 3.68-8.21 8.2-8.21 2.19 0 4.25.86 5.8 2.41a8.14 8.14 0 0 1 2.4 5.8c.01 4.53-3.67 8.2-8.2 8.2zm4.49-6.15c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.17.25-.63.8-.78.96-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.24-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.47-.01-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.42 1.02 2.59.12.17 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.17-.06-.11-.22-.17-.47-.29z"/>
+        </svg>
+      </a>
     </>
   );
 }

@@ -503,6 +503,7 @@ html, body {
   }
   .cat-card:hover{ transform:translateY(-2px); border-color:var(--line-strong); }
   .cat-card-image{
+    position:relative;
     aspect-ratio:1;
     background:var(--paper-2);
     display:flex;
@@ -707,6 +708,37 @@ html, body {
     gap:10px;
   }
   .footer-social .social-icon{ width:24px; height:24px; }
+  .social-icon-whatsapp{
+    background:#25D366;
+    color:#fff;
+  }
+  .social-chip-whatsapp:hover{
+    border-color:#25D366;
+    background:color-mix(in srgb, #25D366 16%, transparent);
+  }
+  .whatsapp-float{
+    position:fixed;
+    right:clamp(16px,4vw,28px);
+    bottom:clamp(16px,4vw,28px);
+    z-index:50;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:#25D366;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 24px rgba(0,0,0,0.22);
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .whatsapp-float:hover{
+    transform:translateY(-3px) scale(1.04);
+    box-shadow:0 14px 30px rgba(0,0,0,0.28);
+  }
+  @media (max-width:700px){
+    .whatsapp-float{ width:52px; height:52px; }
+  }
 
   .form-card{
     background:color-mix(in srgb, var(--paper) 8%, transparent);
@@ -987,6 +1019,7 @@ html, body {
   align-items:center;
 }
 .about-media{
+  position:relative;
   border-radius:20px; overflow:hidden; aspect-ratio:4/5;
   background-size:cover; background-position:center;
   border:1px solid var(--line);

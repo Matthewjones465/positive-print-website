@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getJournalPosts, type JournalPostSummary } from "@/lib/content";
 import { getInstagramPosts, instagramPostTitle, type InstagramPost } from "@/lib/instagram";
 
@@ -120,8 +121,13 @@ export default async function JournalPage() {
                 >
                   <div className="cat-card-image">
                     {item.imageUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={item.imageUrl} alt={item.title} loading="lazy" />
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 700px) 50vw, 220px"
+                        style={{ objectFit: "cover" }}
+                      />
                     ) : (
                       <div className="cat-card-noimage" />
                     )}

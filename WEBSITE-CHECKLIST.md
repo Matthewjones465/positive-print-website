@@ -4,12 +4,14 @@ A running checklist of gaps and improvements. Check items off as they ship. Last
 
 ## Pass 1 — Technical / SEO foundation (invisible but critical)
 
-- [ ] Fix stale metadata in `layout.tsx` ("50% Black Woman-owned" → BEE Level 2)
-- [ ] Add Open Graph + Twitter card metadata (so shared links on WhatsApp/LinkedIn/Slack show a proper title, description, image)
-- [ ] Add `sitemap.xml` and `robots.txt` for Google indexing
-- [ ] Add Vercel Analytics (or GA4) so there's visibility into real traffic and conversion
-- [ ] Convert plain `<img>` tags to `next/image` across the site for responsive sizing, lazy-loading, and modern image formats (WebP/AVIF) — biggest page-speed win
+- [x] Fix stale metadata in `layout.tsx` ("50% Black Woman-owned" → BEE Level 2)
+- [x] Add Open Graph + Twitter card metadata (so shared links on WhatsApp/LinkedIn/Slack show a proper title, description, image)
+- [x] Add `sitemap.xml` and `robots.txt` for Google indexing
+- [x] Add Vercel Analytics (or GA4) so there's visibility into real traffic and conversion
+- [x] Convert plain `<img>` tags to `next/image` across the site for responsive sizing, lazy-loading, and modern image formats (WebP/AVIF) — done for logo, hero, about, client logos, and all journal images. Catalogue product images intentionally left as plain `<img>` since they come from Amrod's live supplier feed on an unpredictable CDN domain.
 - [ ] Confirm the contact form ("Send enquiry") actually submits somewhere structured (CRM/email/Sanity) rather than just a mailto link
+
+- [x] Add WhatsApp integration — floating button site-wide, plus chips in the contact section and footer, linking to wa.me with +27 71 609 3755
 
 ## Pass 2 — Content completeness (Sanity CMS)
 
