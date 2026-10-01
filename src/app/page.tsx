@@ -12,6 +12,15 @@ import { PortableText } from "@portabletext/react";
 
 export const revalidate = 300;
 
+export const metadata = {
+  title: "Positive Print & Promotion — Branding, Apparel & Promotional Print in Durban",
+  description:
+    "Durban-based branding studio delivering apparel branding, signage, packaging, promotional products and print — 100% Woman-owned, BEE Level 2. Get a quote today.",
+  alternates: {
+    canonical: "/",
+  },
+};
+
 const PORTFOLIO_FALLBACK_CLASS = ["p1", "p2", "p3", "p4", "p5", "p6"];
 
 const FAQ_ITEMS = [
@@ -64,8 +73,33 @@ export default async function Home() {
     .filter((url): url is string => Boolean(url))
     .slice(0, 3);
 
+  const localBusinessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Positive Print & Promotion",
+    description: settings.heroSubtext,
+    url: "https://www.positivepp.co.za",
+    telephone: settings.phone,
+    email: settings.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: settings.studioAddress,
+      addressLocality: "Durban",
+      addressRegion: "KwaZulu-Natal",
+      addressCountry: "ZA",
+    },
+    areaServed: ["Durban", "Umhlanga", "KwaZulu-Natal", "South Africa"],
+    sameAs: [`https://www.instagram.com/${instagramHandle}`],
+    priceRange: "$$",
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+      />
       <div className="topbar">
         <div className="wrap topbar-inner">
           <div className="brand">
@@ -217,12 +251,16 @@ export default async function Home() {
               <Reveal className="p-card-wrap" delayMs={i * 70} key={p._id}>
                 <div
                   className={`p-card ${p.imageUrl ? "" : PORTFOLIO_FALLBACK_CLASS[i % PORTFOLIO_FALLBACK_CLASS.length]}`}
-                  style={
-                    p.imageUrl
-                      ? { backgroundImage: `url(${p.imageUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
-                      : undefined
-                  }
                 >
+                  {p.imageUrl && (
+                    <Image
+                      src={p.imageUrl}
+                      alt={`${p.title} — ${p.category}`}
+                      fill
+                      sizes="(max-width: 800px) 100vw, 33vw"
+                      style={{ objectFit: "cover", zIndex: -1 }}
+                    />
+                  )}
                   <span className="p-glow" aria-hidden="true" />
                   <div className="p-tag">{String(i + 1).padStart(2, "0")} — {p.category}</div>
                   <h3>{p.title}</h3>
@@ -248,9 +286,17 @@ export default async function Home() {
               <h3>Product catalogue</h3>
               <p>Scroll through promotional products by category, view details, and enquire directly — live from our supplier feed.</p>
               <div className="phase-mock">
-                <div className="sw has-img" style={{ backgroundImage: "url(/images/services/catalogue-1.jpg)" }}></div>
-                <div className="sw has-img" style={{ backgroundImage: "url(/images/services/catalogue-2.jpg)" }}></div>
-                <div className="sw has-img" style={{ backgroundImage: "url(/images/services/catalogue-3.jpg)" }}></div>
+                {["catalogue-1", "catalogue-2", "catalogue-3"].map((name) => (
+                  <div className="sw has-img" key={name}>
+                    <Image
+                      src={`/images/services/${name}.jpg`}
+                      alt="Promotional products from our catalogue"
+                      fill
+                      sizes="(max-width: 700px) 33vw, 160px"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                ))}
               </div>
               <div className="note">Browse the full catalogue →</div>
             </a>
@@ -272,8 +318,17 @@ export default async function Home() {
                   <div
                     key={i}
                     className={journalPreviewImages[i] ? "sw has-img" : "sw"}
-                    style={journalPreviewImages[i] ? { backgroundImage: `url(${journalPreviewImages[i]})` } : undefined}
-                  ></div>
+                  >
+                    {journalPreviewImages[i] && (
+                      <Image
+                        src={journalPreviewImages[i]}
+                        alt="Recent post from our Instagram"
+                        fill
+                        sizes="(max-width: 700px) 33vw, 160px"
+                        style={{ objectFit: "cover" }}
+                      />
+                    )}
+                  </div>
                 ))}
               </div>
               <div className="note">

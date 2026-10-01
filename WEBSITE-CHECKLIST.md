@@ -13,6 +13,10 @@ A running checklist of gaps and improvements. Check items off as they ship. Last
 
 - [x] Add WhatsApp integration — floating button site-wide, plus chips in the contact section and footer, linking to wa.me with +27 71 609 3755
 
+- [x] Compress oversized source images (catalogue-2.jpg was 3MB/2362px for a small swatch — now 163KB) and convert all remaining CSS background-images (portfolio grid, catalogue swatches, journal preview swatches) to next/image
+- [x] Add LocalBusiness (ProfessionalService) JSON-LD structured data for local SEO
+- [x] Add keyword-rich homepage-specific metadata (previously inherited only the generic site default)
+
 ## Pass 2 — Content completeness (Sanity CMS)
 
 - [ ] Audit Portfolio Items in Sanity Studio — replace any placeholder/fallback entries with real project photography
