@@ -9,7 +9,6 @@ import Image from "next/image";
 import Reveal from "./Reveal";
 import EnquiryForm from "./EnquiryForm";
 import ServicePillars from "./ServicePillars";
-import FeaturedWork from "./FeaturedWork";
 import FAQAccordion from "./FAQAccordion";
 import { PortableText } from "@portabletext/react";
 
@@ -143,7 +142,7 @@ export default async function Home() {
               <span className="seg-icon">→</span>
               <span className="seg-label">Get an instant quote</span>
             </a>
-            <a className="seg-btn seg-btn-light" href="#work">
+            <a className="seg-btn seg-btn-light" href="#portfolio">
               <span className="seg-icon">↓</span>
               <span className="seg-label">See the work</span>
             </a>
@@ -289,21 +288,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ---- featured work / case studies ---- */}
-      <section className="section" id="work">
-        <div className="wrap">
-          <Reveal>
-            <span className="eyebrow-mark">Case studies</span>
-            <h2 className="display" style={{ fontSize: "clamp(1.8rem,4vw,2.8rem)", marginBottom: "16px", maxWidth: "22ch" }}>
-              Multi-discipline work for brands who refuse to compromise.
-            </h2>
-            <p style={{ maxWidth: "62ch", color: "var(--ink-soft)", fontSize: "1.02rem", lineHeight: 1.6, marginBottom: "40px" }}>
-              A few of the accounts we run end-to-end — strategy, production and activation under one roof.
-            </p>
-          </Reveal>
-          <FeaturedWork />
-        </div>
-      </section>
 
       {/* ---- catalogue / journal panels ---- */}
       <section className="section" id="catalogue">
