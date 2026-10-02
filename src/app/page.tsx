@@ -9,6 +9,7 @@ import Image from "next/image";
 import Reveal from "./Reveal";
 import EnquiryForm from "./EnquiryForm";
 import ServicePillars from "./ServicePillars";
+import InstagramShowcase from "./InstagramShowcase";
 import FAQAccordion from "./FAQAccordion";
 import { PortableText } from "@portabletext/react";
 
@@ -74,6 +75,13 @@ export default async function Home() {
     .map((p) => p.mediaUrl ?? p.thumbnailUrl)
     .filter((url): url is string => Boolean(url))
     .slice(0, 3);
+
+  const instagramShowcasePosts = instagramPosts.map((p) => ({
+    id: p.id,
+    imageUrl: p.mediaUrl ?? p.thumbnailUrl,
+    permalink: p.permalink,
+    caption: p.caption,
+  }));
 
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
@@ -356,6 +364,30 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* ---- instagram showcase: proof of work, straight from the feed ---- */}
+      {instagramShowcasePosts.length > 0 && (
+        <section className="section">
+          <div className="wrap">
+            <Reveal>
+              <span className="eyebrow-mark">Straight from the floor</span>
+              <h2 className="display" style={{ fontSize: "clamp(1.8rem,4vw,2.8rem)", marginBottom: "16px", maxWidth: "20ch" }}>
+                Our work, as it happens.
+              </h2>
+              <p style={{ maxWidth: "62ch", color: "var(--ink-soft)", fontSize: "1.02rem", lineHeight: 1.6, marginBottom: "36px" }}>
+                No staged portfolio — this is the real feed from our studio floor, activations, and client work in progress.
+              </p>
+            </Reveal>
+            <InstagramShowcase posts={instagramShowcasePosts} handle={instagramHandle} />
+            <div style={{ marginTop: "28px" }}>
+              <a className="seg-btn seg-btn-light" href={`https://www.instagram.com/${instagramHandle}`} target="_blank" rel="noopener noreferrer">
+                <span className="seg-icon">↗</span>
+                <span className="seg-label">Follow @{instagramHandle}</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ---- FAQ ---- */}
       <section className="section faq-section">
