@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { getJournalPosts, type JournalPostSummary } from "@/lib/content";
+import { getJournalPosts, getSiteSettings, type JournalPostSummary } from "@/lib/content";
 import { getInstagramPosts, instagramPostTitle, type InstagramPost } from "@/lib/instagram";
 
 export const metadata: Metadata = {
@@ -75,9 +75,10 @@ function instagramToFeedItem(post: InstagramPost): FeedItem {
 }
 
 export default async function JournalPage() {
-  const [sanityPosts, instagramPosts] = await Promise.all([
+  const [sanityPosts, instagramPosts, settings] = await Promise.all([
     getJournalPosts(),
     getInstagramPosts(),
+    getSiteSettings(),
   ]);
 
   const feed: FeedItem[] = [
@@ -94,11 +95,27 @@ export default async function JournalPage() {
           <span className="hero-tag">Studio journal</span>
           <h1 className="display">From the<br />studio floor</h1>
           <p className="hero-sub">
-            Recent projects, behind-the-scenes notes, and updates from the Positive Print
-            & Promotion team — including our latest from Instagram.
+            A running record of print runs, brand launches, activations, and content shoots
+            as they happen — no staged portfolio, just the real work in progress.
           </p>
         </div>
       </header>
+
+      <section className="section" style={{ paddingBottom: "0" }}>
+        <div className="wrap" style={{ maxWidth: "760px" }}>
+          <p style={{ fontSize: "1.05rem", lineHeight: 1.7, color: "var(--ink-soft)" }}>
+            Every entry here comes straight from one of our four disciplines — print, signage
+            and merch production; brand and design strategy; photo and video content; or live
+            events and activations. We run all four under one studio, so a single client
+            engagement often moves through several of them at once. This feed is where that
+            process actually gets documented, alongside our{" "}
+            <a href={`https://www.instagram.com/${settings.instagramHandle.replace(/^@/, "")}`} target="_blank" rel="noopener noreferrer">
+              Instagram
+            </a>
+            .
+          </p>
+        </div>
+      </section>
 
       <section className="section">
         <div className="wrap">
