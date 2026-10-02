@@ -1,0 +1,8 @@
+/* Scoped Tailwind import: theme + utilities only, no preflight reset.
+   This project has an existing hand-built CSS system (globals.css);
+   importing Tailwind's base/preflight layer would reset margins,
+   headings, and other elements sitewide and break it. Utility
+   classes (flex, grid, gap-*, text-*, etc.) are additive and safe
+   to use alongside the existing classes. */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);

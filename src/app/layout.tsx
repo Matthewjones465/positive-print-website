@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import "./tailwind.css";
 
 const SITE_URL = "https://www.positivepp.co.za";
 const SITE_TITLE = "Positive Print & Promotion";

@@ -8,6 +8,8 @@ import { getInstagramPosts } from "@/lib/instagram";
 import Image from "next/image";
 import Reveal from "./Reveal";
 import EnquiryForm from "./EnquiryForm";
+import ServicePillars from "./ServicePillars";
+import FeaturedWork from "./FeaturedWork";
 import FAQAccordion from "./FAQAccordion";
 import { PortableText } from "@portabletext/react";
 
@@ -89,7 +91,7 @@ export default async function Home() {
       addressRegion: "KwaZulu-Natal",
       addressCountry: "ZA",
     },
-    areaServed: ["Durban", "Umhlanga", "KwaZulu-Natal", "South Africa"],
+    areaServed: ["Durban", "Umhlanga", "Ballito", "KwaZulu-Natal", "South Africa"],
     sameAs: [`https://www.instagram.com/${instagramHandle}`],
     priceRange: "$$",
   };
@@ -139,9 +141,9 @@ export default async function Home() {
           <div className="hero-actions">
             <a className="seg-btn" href="#contact">
               <span className="seg-icon">→</span>
-              <span className="seg-label">Start a project</span>
+              <span className="seg-label">Get an instant quote</span>
             </a>
-            <a className="seg-btn seg-btn-light" href="#portfolio">
+            <a className="seg-btn seg-btn-light" href="#work">
               <span className="seg-icon">↓</span>
               <span className="seg-label">See the work</span>
             </a>
@@ -239,10 +241,25 @@ export default async function Home() {
       </section>
 
       {/* ---- portfolio / selected work ---- */}
+      <section className="section" id="services">
+        <div className="wrap">
+          <Reveal>
+            <span className="eyebrow-mark">What we do</span>
+            <h2 className="display" style={{ fontSize: "clamp(1.8rem,4vw,2.8rem)", marginBottom: "16px", maxWidth: "22ch" }}>
+              Four disciplines. One studio. Zero handoffs.
+            </h2>
+            <p style={{ maxWidth: "62ch", color: "var(--ink-soft)", fontSize: "1.02rem", lineHeight: 1.6, marginBottom: "40px" }}>
+              Positive Print & Promotion runs as a single coordinated studio across print, brand, media and live activation — so a project never gets lost between suppliers.
+            </p>
+          </Reveal>
+          <ServicePillars />
+        </div>
+      </section>
+
       <section className="section" id="portfolio">
         <div className="wrap">
           <Reveal>
-            <span className="eyebrow-mark">Selected work</span>
+            <span className="eyebrow-mark">By discipline</span>
             <h2 className="display" style={{ fontSize: "clamp(1.8rem,4vw,2.8rem)", marginBottom: "40px", maxWidth: "18ch" }}>
               Shaping bold ideas into absolute print precision.
             </h2>
@@ -269,6 +286,22 @@ export default async function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ---- featured work / case studies ---- */}
+      <section className="section" id="work">
+        <div className="wrap">
+          <Reveal>
+            <span className="eyebrow-mark">Case studies</span>
+            <h2 className="display" style={{ fontSize: "clamp(1.8rem,4vw,2.8rem)", marginBottom: "16px", maxWidth: "22ch" }}>
+              Multi-discipline work for brands who refuse to compromise.
+            </h2>
+            <p style={{ maxWidth: "62ch", color: "var(--ink-soft)", fontSize: "1.02rem", lineHeight: 1.6, marginBottom: "40px" }}>
+              A few of the accounts we run end-to-end — strategy, production and activation under one roof.
+            </p>
+          </Reveal>
+          <FeaturedWork />
         </div>
       </section>
 
